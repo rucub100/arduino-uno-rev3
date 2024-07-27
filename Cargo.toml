@@ -2,5 +2,21 @@
 name = "arduino-uno-rev3"
 version = "0.0.0"
 edition = "2021"
+publish = false
+
+[[bin]]
+name = "arduino-uno"
+path = "src/main.rs"
+test = false
+bench = false
 
 [dependencies]
+panic-halt = "0.2.0"
+
+[profile.dev]
+panic = "abort"
+opt-level = "z"
+
+[profile.release]
+panic = "abort"
+opt-level = "z"
