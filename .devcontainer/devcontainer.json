@@ -3,11 +3,21 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "runArgs": ["--privileged"],
+  "privileged": true,
+  "containerUser": "vscode",
   "mounts": ["type=bind,source=/dev,target=/dev"],
   "customizations": {
     "vscode": {
-      "extensions": ["rust-lang.rust-analyzer", "tamasfe.even-better-toml"]
+      "extensions": ["rust-lang.rust-analyzer", "tamasfe.even-better-toml"],
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash",
+            "icon": "terminal-bash"
+          }
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
     }
   }
 }
