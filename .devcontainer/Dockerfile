@@ -27,6 +27,8 @@ RUN sudo apt update
 RUN sudo apt -y install avr-libc gcc-avr pkg-config avrdude libudev-dev build-essential
 RUN rustup toolchain install stable
 RUN rustup toolchain install nightly
+RUN rustup component add rust-src rustfmt --toolchain stable
+RUN rustup component add rust-src rustfmt --toolchain nightly
 RUN cargo +stable install ravedude
 
 # Echo statements for debugging
