@@ -380,3 +380,153 @@ const PCIE0: usize = 0x00;
 const PCIE1: usize = 0x01;
 /// Bit 2 - Pin Change Interrupt Enable 2
 const PCIE2: usize = 0x02;
+
+/// EICRA - External Interrupt Control Register A
+const EICRA_ADDR: usize = 0x69;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+
+/// PCMSK0 - Pin Change Mask Register 0
+const PCMSK0_ADDR: usize = 0x6B;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// PCMSK1 - Pin Change Mask Register 1
+const PCMSK1_ADDR: usize = 0x6C;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+
+/// PCMSK2 - Pin Change Mask Register 2
+const PCMSK2_ADDR: usize = 0x6D;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TIMSK0 - Timer/Counter 0 Interrupt Mask Register
+const TIMSK0_ADDR: usize = 0x6E;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+
+/// TIMSK1 - Timer/Counter 1 Interrupt Mask Register
+const TIMSK1_ADDR: usize = 0x6F;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 5 - TODO
+
+/// TIMSK2 - Timer/Counter 2 Interrupt Mask Register
+const TIMSK2_ADDR: usize = 0x70;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+
+/// ADCL - ADC Data Register Low Byte
+const ADCL_ADDR: usize = 0x78;
+/// ADCH - ADC Data Register High Byte
+const ADCH_ADDR: usize = 0x79;
+
+/// ADCSRA - ADC Control and Status Register A
+const ADCSRA_ADDR: usize = 0x7A;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// ADCSRB - ADC Control and Status Register B
+const ADCSRB_ADDR: usize = 0x7B;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 6 - TODO
+
+/// ADMUX - ADC Multiplexer Selection Register
+const ADMUX_ADDR: usize = 0x7C;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// DIDR0 - Digital Input Disable Register 0
+const DIDR0_ADDR: usize = 0x7E;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+
+/// DIDR1 - Digital Input Disable Register 1
+const DIDR1_ADDR: usize = 0x7F;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+
+/// TCCR1A - Timer/Counter 1 Control Register A
+const TCCR1A_ADDR: usize = 0x80;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TCCR1A - Timer/Counter 1 Control Register B
+const TCCR1B_ADDR: usize = 0x81;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TCCR1A - Timer/Counter 1 Control Register C
+const TCCR1C_ADDR: usize = 0x82;
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TCNT1L - Timer/Counter 1 Counter Register Low Byte
+const TCNT1L_ADDR: usize = 0x84;
+/// TCNT1H - Timer/Counter 1 Counter Register High Byte
+const TCNT1H_ADDR: usize = 0x85;
+
+/// ICR1L - Timer/Counter 1 Input Capture Register Low Byte
+const ICR1L_ADDR: usize = 0x86;
+/// ICR1H - Timer/Counter 1 Input Capture Register High Byte
+const ICR1H_ADDR: usize = 0x87;
+
+/// OCR1AL - Timer/Counter 1 Output Compare Register A Low Byte
+const OCR1AL_ADDR: usize = 0x88;
+/// OCR1AH - Timer/Counter 1 Output Compare Register A High Byte
+const OCR1AH_ADDR: usize = 0x89;
+
+/// OCR1AL - Timer/Counter 1 Output Compare Register B Low Byte
+const OCR1BL_ADDR: usize = 0x8A;
+/// OCR1AH - Timer/Counter 1 Output Compare Register B High Byte
+const OCR1BH_ADDR: usize = 0x8B;
