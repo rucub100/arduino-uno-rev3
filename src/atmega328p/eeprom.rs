@@ -1,2 +1,2 @@
-/// EEPROM
-/// Datasheet page 19 et seqq.
+//! EEPROM
+//! Datasheet page 19 et seqq.

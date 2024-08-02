@@ -1,6 +1,7 @@
 #![no_std]
 #![no_main]
-#![feature(abi_avr_interrupt)] // https://doc.rust-lang.org/nightly/unstable-book/language-features/abi-avr-interrupt.html
+// https://doc.rust-lang.org/nightly/unstable-book/language-features/abi-avr-interrupt.html
+#![feature(abi_avr_interrupt)]
 
 use panic_halt as _;
 

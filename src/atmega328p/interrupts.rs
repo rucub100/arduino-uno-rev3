@@ -1,2 +1,2 @@
-/// Interrupts
-/// Datasheet page 49 et seqq.
+//! Interrupts
+//! Datasheet page 49 et seqq.

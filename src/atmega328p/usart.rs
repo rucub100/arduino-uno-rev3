@@ -1,2 +1,2 @@
-/// USART
-/// Datasheet page 143 et seqq.
+//! USART
+//! Datasheet page 143 et seqq.

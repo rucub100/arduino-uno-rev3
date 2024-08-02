@@ -1,5 +1,6 @@
-/// Interrupt Vectors in ATmega328P
-/// See page 49 in ATmega328P datasheet
+//! # Interrupt Vectors in ATmega328P
+//!
+//! For detailed information, refer to page 49 in the ATmega328P datasheet.
 
 /// Reset + 25 Interrupt Vectors
 #[allow(dead_code)]
