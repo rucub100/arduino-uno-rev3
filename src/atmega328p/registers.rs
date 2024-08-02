@@ -158,6 +158,107 @@ const EEARL_ADDR_IO: usize = 0x21;
 const EEARH_ADDR: usize = 0x42;
 const EEARH_ADDR_IO: usize = 0x22;
 
+/// GTCCR - General Timer/Counter Control Register
+const GTCCR_ADDR: usize = 0x43;
+const GTCCR_ADDR_IO: usize = 0x23;
+/// Bit 0 - Prescaler Reset (Timer/Counter 1 and 2)
+const PSRSYNC: usize = 0x00;
+/// Bit 1 - Prescaler Reset Timer/Counter2
+const PSRASY: usize = 0x01;
+/// Bit 7 - Timer/Counter Synchronization Mode
+const TSM: usize = 0x07;
+
+/// TCCR0A - Timer/Counter 0 Control Register A
+const TCCR0A_ADDR: usize = 0x44;
+const TCCR0A_ADDR_IO: usize = 0x24;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TCCR0B - Timer/Counter 0 Control Register B
+const TCCR0B_ADDR: usize = 0x45;
+const TCCR0B_ADDR_IO: usize = 0x25;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TCNT0 - Timer/Counter 0
+const TCNT0_ADDR: usize = 0x46;
+const TCNT0_ADDR_IO: usize = 0x26;
+
+/// OCR0A - Timer/Counter 0 Output Compare Register A
+const OCR0A_ADDR: usize = 0x47;
+const OCR0A_ADDR_IO: usize = 0x27;
+
+/// OCR0B - Timer/Counter 0 Output Compare Register B
+const OCR0B_ADDR: usize = 0x48;
+const OCR0B_ADDR_IO: usize = 0x28;
+
+/// GPIOR1 - General Purpose I/O Register 1
+const GPIOR1_ADDR: usize = 0x4A;
+const GPIOR1_ADDR_IO: usize = 0x2A;
+
+/// GPIOR2 - General Purpose I/O Register 2
+const GPIOR2_ADDR: usize = 0x4B;
+const GPIOR2_ADDR_IO: usize = 0x2B;
+
+/// SPCR - SPI Control Register
+const SPCR_ADDR: usize = 0x4C;
+const SPCR_ADDR_IO: usize = 0x2C;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// SPSR - SPI Status Register
+const SPSR_ADDR: usize = 0x4D;
+const SPSR_ADDR_IO: usize = 0x2D;
+/// Bit 0 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// SPDR - SPI Data Register
+const SPDR_ADDR: usize = 0x4E;
+const SPDR_ADDR_IO: usize = 0x2E;
+
+/// ACSR - Analog Comparator Control and Status Register
+const ACSR_ADDR: usize = 0x50;
+const ACSR_ADDR_IO: usize = 0x30;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// SMCR - Sleep Mode Control Register
+const SMCR_ADDR: usize = 0x53;
+const SMCR_ADDR_IO: usize = 0x33;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+
+/// MCUSR - MCU Status Register
+const MCUSR_ADDR: usize = 0x54;
+const MCUSR_ADDR_IO: usize = 0x34;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+
 /// MCUCR - MCU Control Register
 const MCUCR_ADDR: usize = 0x55;
 const MCUCR_ADDR_IO: usize = 0x35;
@@ -200,3 +301,82 @@ const BODSE: usize = 0x05;
 /// A sleep instruction must be executed while BODS is active in order to turn off the BOD for the actual sleep mode.
 /// The BODS bit is automatically cleared after three clock cycles.
 const BODS: usize = 0x06;
+
+/// SPMCSR - Store Program Memory Control and Status Register
+const SPMCSR_ADDR: usize = 0x57;
+const SPMCSR_ADDR_IO: usize = 0x37;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// SPL - Stack Pointer Low Byte
+const SPL_ADDR: usize = 0x5D;
+const SPL_ADDR_IO: usize = 0x3D;
+/// SPH - Stack Pointer High Byte
+const SPH_ADDR: usize = 0x5E;
+const SPH_ADDR_IO: usize = 0x3E;
+
+/// SREG - Status Register
+const SREG_ADDR: usize = 0x5F;
+const SREG_ADDR_IO: usize = 0x3F;
+/// Bit 0 - C: Carry Flag
+const C: usize = 0x00;
+/// Bit 1 - Z: Zero Flag
+const Z: usize = 0x01;
+/// Bit 2 - N: Negative Flag
+const N: usize = 0x02;
+/// Bit 3 - V: Two’s complement overflow Flag
+const V: usize = 0x03;
+/// Bit 4 - S: Sign Bit, S = N ⊕ V
+const S: usize = 0x04;
+/// Bit 5 - H: Half Carry Flag
+const H: usize = 0x05;
+/// Bit 6 - T: Transfer Bit
+const T: usize = 0x06;
+/// Bit 7 - I: Global Interrupt Enable
+const I: usize = 0x07;
+
+/// WDTCSR - Watchdog Timer Control Register
+const WDTCSR_ADDR: usize = 0x60;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// CLKPR - Clock Prescale Register
+const CLKPR_ADDR: usize = 0x61;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 7 - TODO
+
+/// PRR - Power Reduction Register
+const PRR_ADDR: usize = 0x64;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// OSCCAL - Oscillator Calibration Value
+const OSCCAL_ADDR: usize = 0x66;
+
+/// PCICR - Pin Change Interrupt Control Register
+const PCICR_ADDR: usize = 0x68;
+/// Bit 0 - Pin Change Interrupt Enable 0
+const PCIE0: usize = 0x00;
+/// Bit 1 - Pin Change Interrupt Enable 1
+const PCIE1: usize = 0x01;
+/// Bit 2 - Pin Change Interrupt Enable 2
+const PCIE2: usize = 0x02;
