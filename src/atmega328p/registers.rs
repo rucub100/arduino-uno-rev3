@@ -511,9 +511,9 @@ const TCCR1C_ADDR: usize = 0x82;
 /// Bit 6 - TODO
 /// Bit 7 - TODO
 
-/// TCNT1L - Timer/Counter 1 Counter Register Low Byte
+/// TCNT1L - Timer/Counter 1 Register Low Byte
 const TCNT1L_ADDR: usize = 0x84;
-/// TCNT1H - Timer/Counter 1 Counter Register High Byte
+/// TCNT1H - Timer/Counter 1 Register High Byte
 const TCNT1H_ADDR: usize = 0x85;
 
 /// ICR1L - Timer/Counter 1 Input Capture Register Low Byte
@@ -530,3 +530,30 @@ const OCR1AH_ADDR: usize = 0x89;
 const OCR1BL_ADDR: usize = 0x8A;
 /// OCR1AH - Timer/Counter 1 Output Compare Register B High Byte
 const OCR1BH_ADDR: usize = 0x8B;
+
+/// TCCR2A - Timer/Counter 2 Control Register A
+const TCCR2A_ADDR: usize = 0xB0;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TCCR2B - Timer/Counter 2 Control Register B
+const TCCR2B_ADDR: usize = 0xB1;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TCNT2 - Timer/Counter 2 Register
+const TCNT2_ADDR: usize = 0xB2;
+
+/// OCR2A - Timer/Counter 2 Output Compare Register A
+const OCR2A_ADDR: usize = 0xB3;
+
+/// OCR2B - Timer/Counter 2 Output Compare
+const OCR2B_ADDR: usize = 0xB4;
