@@ -1,7 +1,7 @@
 //! Register/Port Description
 //! Datasheet page 275 et seqq.
 
-/// Constants
+/// # Constants
 const BIT0: usize = 0x00;
 const BIT1: usize = 0x01;
 const BIT2: usize = 0x02;
@@ -17,7 +17,7 @@ const OCFA: usize = 0x01;
 /// Timer/Counter Output Compare Flag B
 const OCFB: usize = 0x02;
 
-/// The Port B is 8-bit wide
+/// # The Port B is 8-bit wide
 /// PINB - The Port B Input Pins Address (Read Only)
 const PINB_ADDR: usize = 0x23;
 const PINB_ADDR_IO: usize = 0x03;
@@ -28,7 +28,7 @@ const DDRB_ADDR_IO: usize = 0x04;
 const PORTB_ADDR: usize = 0x25;
 const PORTB_ADDR_IO: usize = 0x05;
 
-/// The Port C is 7-bit wide
+/// # The Port C is 7-bit wide
 /// PINC - The Port C Input Pins Address (Read Only)
 const PINC_ADDR: usize = 0x26;
 const PINC_ADDR_IO: usize = 0x06;
@@ -39,7 +39,7 @@ const DDRC_ADDR_IO: usize = 0x07;
 const PORTC_ADDR: usize = 0x28;
 const PORTC_ADDR_IO: usize = 0x08;
 
-/// The Port D is 8-bit wide
+/// # The Port D is 8-bit wide
 /// PIND - The Port D Input Pins Address (Read Only)
 const PIND_ADDR: usize = 0x29;
 const PIND_ADDR_IO: usize = 0x09;
@@ -50,12 +50,12 @@ const DDRD_ADDR_IO: usize = 0x0A;
 const PORTD_ADDR: usize = 0x2B;
 const PORTD_ADDR_IO: usize = 0x0B;
 
-/// The Timer/Counter 0 is 8-bit wide
+/// # The Timer/Counter 0 is 8-bit wide
 /// TIFR0 - Timer/Counter 0 Interrupt Flag Register
 const TIFR0_ADDR: usize = 0x35;
 const TIFR0_ADDR_IO: usize = 0x15;
 
-/// The Timer/Counter 1 is 16-bit wide
+/// # The Timer/Counter 1 is 16-bit wide
 /// TIFR1 - Timer/Counter 1 Interrupt Flag Register
 const TIFR1_ADDR: usize = 0x36;
 const TIFR1_ADDR_IO: usize = 0x16;
@@ -68,7 +68,7 @@ const TIFR1_ADDR_IO: usize = 0x16;
 /// Alternatively, ICF1 can be cleared by writing a logic one to its bit location.
 const ICF1: usize = 0x05;
 
-/// The Timer/Counter 2 is 8-bit wide
+/// # The Timer/Counter 2 is 8-bit wide
 /// TIFR2 - Timer/Counter 2 Interrupt Flag Register
 const TIFR2_ADDR: usize = 0x37;
 const TIFR2_ADDR_IO: usize = 0x17;
@@ -557,3 +557,101 @@ const OCR2A_ADDR: usize = 0xB3;
 
 /// OCR2B - Timer/Counter 2 Output Compare
 const OCR2B_ADDR: usize = 0xB4;
+
+/// ASSR - Asynchronous Status Register
+const ASSR_ADDR: usize = 0xB6;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+
+/// TWBR - TWI Bit Rate Register
+const TWBR_ADDR: usize = 0xB8;
+
+/// TWSR - TWI Status Register
+const TWSR_ADDR: usize = 0xB9;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TWAR - TWI (Slave) Address Register
+const TWAR_ADDR: usize = 0xBA;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TWDR - TWI Data Register
+const TWDR_ADDR: usize = 0xBB;
+
+/// TWCR - TWI Control Register
+const TWCR_ADDR: usize = 0xBC;
+/// Bit 0 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// TWAMR - TWI (Slave) Address Mask Register
+const TWAMR_ADDR: usize = 0xBD;
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// UCSR0A - USART Control and Status Register A
+const UCSR0A_ADDR: usize = 0xC0;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// UCSROB - USART Control and Status Register B
+const UCSR0B_ADDR: usize = 0xC1;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// UCSROC - USART Control and Status Register C
+const UCSR0C_ADDR: usize = 0xC2;
+/// Bit 0 - TODO
+/// Bit 1 - TODO
+/// Bit 2 - TODO
+/// Bit 3 - TODO
+/// Bit 4 - TODO
+/// Bit 5 - TODO
+/// Bit 6 - TODO
+/// Bit 7 - TODO
+
+/// UBRR0L - USART Baud Rate Register Low Byte
+const UBRR0L_ADDR: usize = 0xC4;
+/// UBRR0H - USART Baud Rate Register High Byte
+const UBRR0H_ADDR: usize = 0xC5;
+
+/// UDR0 - USART I/O Data Register
+const UDR0_ADDR: usize = 0xC6;
