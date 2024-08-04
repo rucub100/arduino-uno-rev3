@@ -25,5 +25,16 @@
 //! - **Power-on Reset** and **Programmable Brown-out Detection**
 //! - **Six Sleep Modes**
 
-pub mod registers;
+mod adc;
+mod analog_comparator;
+mod eeprom;
+mod gpio;
+mod i2c;
+mod interrupts;
+mod power_management;
+mod registers;
+mod spi;
+mod timers_pwm;
+mod usart;
 mod vectors;
+mod watchdog;
