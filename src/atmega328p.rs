@@ -25,4 +25,5 @@
 //! - **Power-on Reset** and **Programmable Brown-out Detection**
 //! - **Six Sleep Modes**
 
+pub mod registers;
 mod vectors;
