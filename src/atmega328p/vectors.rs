@@ -4,7 +4,7 @@
 
 /// Reset + 25 Interrupt Vectors
 #[allow(dead_code)]
-const IVT_SIZE: usize = 26;
+const IVT_SIZE: usize = 25;
 
 // /// INT0 - External Interrupt Request 0
 // #[no_mangle]

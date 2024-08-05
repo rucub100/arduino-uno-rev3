@@ -38,3 +38,5 @@ mod timers_pwm;
 mod usart;
 mod vectors;
 mod watchdog;
+
+pub use power_management::*;

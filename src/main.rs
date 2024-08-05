@@ -4,11 +4,14 @@
 #![feature(abi_avr_interrupt)]
 #![feature(asm_experimental_arch)]
 
+use atmega328p::{sleep_mode, SleepMode};
 use panic_halt as _;
 
 mod atmega328p;
 
 #[no_mangle]
 pub extern "C" fn main() {
-    loop {}
+    loop {
+        sleep_mode(SleepMode::Idle);
+    }
 }
