@@ -8,12 +8,9 @@ use core::{
 
 use crate::atmega328p::interrupts;
 
-use super::{
-    interrupts::free,
-    registers::{
-        BODS, BODSE, MCUCR_ADDR_IO, PRADC, PRR_ADDR, PRSPI, PRTIM0, PRTIM1, PRTIM2, PRTWI, PRUSAR0,
-        SMCR_ADDR,
-    },
+use super::registers::{
+    BODS, BODSE, MCUCR_ADDR_IO, PRADC, PRR_ADDR, PRSPI, PRTIM0, PRTIM1, PRTIM2, PRTWI, PRUSAR0,
+    SMCR_ADDR,
 };
 
 #[allow(dead_code)]
@@ -46,6 +43,7 @@ impl SleepMode {
     }
 }
 
+#[allow(dead_code)]
 pub fn sleep_mode(mode: SleepMode) {
     unsafe {
         mode.write();
@@ -72,9 +70,23 @@ pub fn poweroff_i2c() {
 }
 
 #[allow(dead_code)]
+pub fn poweron_i2c() {
+    unsafe {
+        prr_clear_bit_interrupts_free(PRTWI);
+    }
+}
+
+#[allow(dead_code)]
 pub fn poweroff_timer0() {
     unsafe {
         prr_set_bit_interrupts_free(PRTIM0);
+    }
+}
+
+#[allow(dead_code)]
+pub fn poweron_timer0() {
+    unsafe {
+        prr_clear_bit_interrupts_free(PRTIM0);
     }
 }
 
@@ -86,9 +98,23 @@ pub fn poweroff_timer1() {
 }
 
 #[allow(dead_code)]
+pub fn poweron_timer1() {
+    unsafe {
+        prr_clear_bit_interrupts_free(PRTIM1);
+    }
+}
+
+#[allow(dead_code)]
 pub fn poweroff_timer2() {
     unsafe {
         prr_set_bit_interrupts_free(PRTIM2);
+    }
+}
+
+#[allow(dead_code)]
+pub fn poweron_timer2() {
+    unsafe {
+        prr_clear_bit_interrupts_free(PRTIM2);
     }
 }
 
@@ -100,9 +126,23 @@ pub fn poweroff_adc() {
 }
 
 #[allow(dead_code)]
+pub fn poweron_adc() {
+    unsafe {
+        prr_clear_bit_interrupts_free(PRADC);
+    }
+}
+
+#[allow(dead_code)]
 pub fn poweroff_spi() {
     unsafe {
         prr_set_bit_interrupts_free(PRSPI);
+    }
+}
+
+#[allow(dead_code)]
+pub fn poweron_spi() {
+    unsafe {
+        prr_clear_bit_interrupts_free(PRSPI);
     }
 }
 
@@ -113,11 +153,11 @@ pub fn poweroff_usart() {
     }
 }
 
-unsafe fn prr_set_bit_interrupts_free(bit: u8) {
-    interrupts::free(|| {
-        let prr = read_volatile(PRR_ADDR as *const u8);
-        write_volatile(PRR_ADDR as *mut u8, prr | 1 << bit);
-    });
+#[allow(dead_code)]
+pub fn poweron_usart() {
+    unsafe {
+        prr_clear_bit_interrupts_free(PRUSAR0);
+    }
 }
 
 #[inline(always)]
@@ -131,4 +171,18 @@ unsafe fn disable_brown_out_detector() {
         bodse = const BODSE,
         bods = const BODS
     );
+}
+
+unsafe fn prr_set_bit_interrupts_free(bit: u8) {
+    interrupts::free(|| {
+        let prr = read_volatile(PRR_ADDR as *const u8);
+        write_volatile(PRR_ADDR as *mut u8, prr | 1 << bit);
+    });
+}
+
+unsafe fn prr_clear_bit_interrupts_free(bit: u8) {
+    interrupts::free(|| {
+        let prr = read_volatile(PRR_ADDR as *const u8);
+        write_volatile(PRR_ADDR as *mut u8, prr & !(1 << bit));
+    });
 }
