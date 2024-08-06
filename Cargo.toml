@@ -4,6 +4,11 @@ version = "0.0.0"
 edition = "2021"
 publish = false
 
+[lib]
+name = "atmega328p"
+test = false
+bench = false
+
 [[bin]]
 name = "arduino-uno"
 path = "src/main.rs"
