@@ -3,8 +3,11 @@
 
 use core::{arch::asm, ptr::write_volatile};
 
-use super::registers::SMCR_ADDR;
+use crate::atmega328p::interrupts;
 
+use super::registers::{BODS, BODSE, MCUCR_ADDR_IO, SMCR_ADDR};
+
+#[allow(dead_code)]
 pub enum SleepMode {
     Idle,
     ADCNoiseReduction,
@@ -27,17 +30,40 @@ impl SleepMode {
             SleepMode::ExtendedStandBy => 0b1111,
         }
     }
+
+    #[inline(always)]
+    unsafe fn write(&self) {
+        write_volatile(SMCR_ADDR as *mut u8, self.control_register_value());
+    }
 }
 
 pub fn sleep_mode(mode: SleepMode) {
     unsafe {
-        write_volatile(SMCR_ADDR as *mut u8, mode.control_register_value());
+        mode.write();
+        asm!("sleep");
+    }
+}
+
+#[allow(dead_code)]
+pub fn sleep_mode_with_brown_out_detector_disabled(mode: SleepMode) {
+    unsafe {
+        interrupts::free(|| {
+            mode.write();
+            disable_brown_out_detector();
+        });
         asm!("sleep");
     }
 }
 
 #[inline(always)]
-fn disable_brown_out_detector() {
-    // TODO - implement
-    // page 38 bod sleep only to be used with sleep modes
+unsafe fn disable_brown_out_detector() {
+    asm!(
+        "sbi {mcucraddr}, {bods}",
+        "sbi {mcucraddr}, {bodse}",
+        "sbi {mcucraddr}, {bods}",
+        "cbi {mcucraddr}, {bodse}",
+        mcucraddr = const MCUCR_ADDR_IO,
+        bodse = const BODSE,
+        bods = const BODS
+    );
 }

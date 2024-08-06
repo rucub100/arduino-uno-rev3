@@ -16,3 +16,12 @@ pub(super) fn disable_global_interrupts() {
         asm!("cli");
     }
 }
+
+pub(super) fn free<F>(handler: F)
+where
+    F: FnOnce(),
+{
+    disable_global_interrupts();
+    handler();
+    enable_global_interrupts();
+}
