@@ -27,6 +27,7 @@
 
 mod adc;
 mod analog_comparator;
+mod common;
 mod eeprom;
 mod gpio;
 mod i2c;
