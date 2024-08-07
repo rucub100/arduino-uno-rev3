@@ -6,7 +6,11 @@ use core::{
     ptr::{read_volatile, write_volatile},
 };
 
-use super::registers::{EICRA_ADDR, EIMSK_ADDR, INT0, INT1};
+use super::registers::{
+    ACIE, ADIE, EERIE, EICRA_ADDR, EIMSK_ADDR, ICIE1, INT0, INT1, OCIE0A, OCIE0B, OCIE1A, OCIE1B,
+    OCIE2A, OCIE2B, PCIE0, PCIE1, PCIE2, RXCIE0, SPIE, SPMIE, TOIE0, TOIE1, TOIE2, TWIE, TXCIE0,
+    UDRIE0, WDIE,
+};
 
 #[inline(always)]
 pub fn enable_global_interrupts() {
@@ -91,7 +95,29 @@ impl Interrupt {
         match self {
             Interrupt::Int0 => 1 << INT0,
             Interrupt::Int1 => 1 << INT1,
-            _ => unimplemented!(),
+            Interrupt::PCInt0 => 1 << PCIE0,
+            Interrupt::PCInt1 => 1 << PCIE1,
+            Interrupt::PCInt2 => 1 << PCIE2,
+            Interrupt::WDT => 1 << WDIE,
+            Interrupt::Timer2CompA => 1 << OCIE2A,
+            Interrupt::Timer2CompB => 1 << OCIE2B,
+            Interrupt::Timer2Ovf => 1 << TOIE2,
+            Interrupt::Timer1Capt => 1 << ICIE1,
+            Interrupt::Timer1CompA => 1 << OCIE1A,
+            Interrupt::Timer1CompB => 1 << OCIE1B,
+            Interrupt::Timer1Ovf => 1 << TOIE1,
+            Interrupt::Timer0CompA => 1 << OCIE0A,
+            Interrupt::Timer0CompB => 1 << OCIE0B,
+            Interrupt::Timer0Ovf => 1 << TOIE0,
+            Interrupt::SpiStc => 1 << SPIE,
+            Interrupt::UsartRx => 1 << RXCIE0,
+            Interrupt::UsartDRE => 1 << UDRIE0,
+            Interrupt::UsartTx => 1 << TXCIE0,
+            Interrupt::ADC => 1 << ADIE,
+            Interrupt::EeRdy => 1 << EERIE,
+            Interrupt::AnalogComp => 1 << ACIE,
+            Interrupt::I2C => 1 << TWIE,
+            Interrupt::SPMRdy => 1 << SPMIE,
         }
     }
 
