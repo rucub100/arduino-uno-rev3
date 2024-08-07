@@ -7,9 +7,10 @@ use core::{
 };
 
 use super::registers::{
-    ACIE, ADIE, EERIE, EICRA_ADDR, EIMSK_ADDR, ICIE1, INT0, INT1, OCIE0A, OCIE0B, OCIE1A, OCIE1B,
-    OCIE2A, OCIE2B, PCIE0, PCIE1, PCIE2, RXCIE0, SPIE, SPMIE, TOIE0, TOIE1, TOIE2, TWIE, TXCIE0,
-    UDRIE0, WDIE,
+    ACIE, ACSR_ADDR, ADCSRA_ADDR, ADIE, EECR_ADDR, EERIE, EICRA_ADDR, EIMSK_ADDR, ICIE1, INT0,
+    INT1, OCIE0A, OCIE0B, OCIE1A, OCIE1B, OCIE2A, OCIE2B, PCICR_ADDR, PCIE0, PCIE1, PCIE2, RXCIE0,
+    SPCR_ADDR, SPIE, SPMCSR_ADDR, SPMIE, TIMSK0_ADDR, TIMSK1_ADDR, TIMSK2_ADDR, TOIE0, TOIE1,
+    TOIE2, TWCR_ADDR, TWIE, TXCIE0, UCSR0B_ADDR, UDRIE0, WDIE, WDTCSR_ADDR,
 };
 
 #[inline(always)]
@@ -37,6 +38,7 @@ where
 }
 
 #[allow(dead_code)]
+#[derive(PartialEq, Eq)]
 pub enum Interrupt {
     /// External Interrupt Request 0
     Int0,
@@ -90,14 +92,17 @@ pub enum Interrupt {
     SPMRdy,
 }
 
+/// TODO
+enum PinInterrupt {}
+
 impl Interrupt {
     fn get_mask(&self) -> u8 {
         match self {
             Interrupt::Int0 => 1 << INT0,
             Interrupt::Int1 => 1 << INT1,
-            Interrupt::PCInt0 => 1 << PCIE0,
-            Interrupt::PCInt1 => 1 << PCIE1,
-            Interrupt::PCInt2 => 1 << PCIE2,
+            Interrupt::PCInt0 => 1 << PCIE0, // TODO - PCMSK0???
+            Interrupt::PCInt1 => 1 << PCIE1, // TODO - PCMSK1???
+            Interrupt::PCInt2 => 1 << PCIE2, // TODO - PCMSK2???
             Interrupt::WDT => 1 << WDIE,
             Interrupt::Timer2CompA => 1 << OCIE2A,
             Interrupt::Timer2CompB => 1 << OCIE2B,
@@ -121,28 +126,49 @@ impl Interrupt {
         }
     }
 
-    unsafe fn enable(&self, sense_control: Option<SenseControl>) {
+    fn get_register_addr(&self) -> u8 {
         match self {
-            Interrupt::Int0 | Interrupt::Int1 => {
-                if let Some(sense_control) = sense_control {
-                    sense_control.write(self);
-                }
-
-                let eimsk = read_volatile(EIMSK_ADDR as *const u8);
-                write_volatile(EIMSK_ADDR as *mut u8, eimsk | self.get_mask());
-            }
-            _ => unimplemented!(),
+            Interrupt::Int0 | Interrupt::Int1 => EIMSK_ADDR,
+            Interrupt::PCInt0 | Interrupt::PCInt1 | Interrupt::PCInt2 => PCICR_ADDR,
+            Interrupt::WDT => WDTCSR_ADDR,
+            Interrupt::Timer2CompA | Interrupt::Timer2CompB | Interrupt::Timer2Ovf => TIMSK2_ADDR,
+            Interrupt::Timer1Capt
+            | Interrupt::Timer1CompA
+            | Interrupt::Timer1CompB
+            | Interrupt::Timer1Ovf => TIMSK1_ADDR,
+            Interrupt::Timer0CompA | Interrupt::Timer0CompB | Interrupt::Timer0Ovf => TIMSK0_ADDR,
+            Interrupt::SpiStc => SPCR_ADDR,
+            Interrupt::UsartRx | Interrupt::UsartDRE | Interrupt::UsartTx => UCSR0B_ADDR,
+            Interrupt::ADC => ADCSRA_ADDR,
+            Interrupt::EeRdy => EECR_ADDR,
+            Interrupt::AnalogComp => ACSR_ADDR,
+            Interrupt::I2C => TWCR_ADDR,
+            Interrupt::SPMRdy => SPMCSR_ADDR,
         }
     }
 
-    unsafe fn disable(&self) {
-        match self {
-            Interrupt::Int0 | Interrupt::Int1 => {
-                let eimsk = read_volatile(EIMSK_ADDR as *const u8);
-                write_volatile(EIMSK_ADDR as *mut u8, eimsk & !self.get_mask());
+    unsafe fn modify_register<F>(&self, f: F)
+    where
+        F: FnOnce(u8) -> u8,
+    {
+        let addr = self.get_register_addr();
+
+        let value = read_volatile(addr as *const u8);
+        write_volatile(addr as *mut u8, f(value));
+    }
+
+    unsafe fn enable(&self, sense_control: Option<SenseControl>) {
+        if *self == Interrupt::Int0 || *self == Interrupt::Int1 {
+            if let Some(sense_control) = sense_control {
+                sense_control.write(self);
             }
-            _ => unimplemented!(),
         }
+
+        self.modify_register(|value| value | self.get_mask());
+    }
+
+    unsafe fn disable(&self) {
+        self.modify_register(|value| value & !self.get_mask());
     }
 }
 
@@ -182,6 +208,11 @@ pub fn enable_interrupt(interrupt: Interrupt, sense_control: Option<SenseControl
     unsafe {
         interrupt.enable(sense_control);
     }
+}
+
+#[allow(dead_code)]
+pub fn enable_pin_interrupt(pin_interrupt: PinInterrupt) {
+    unimplemented!();
 }
 
 #[allow(dead_code)]
