@@ -33,6 +33,20 @@ pub(super) unsafe fn clear_bit_interrupts_free(addr: u8, bit: u8) {
     interrupts::free(|| clear_bit(addr, bit));
 }
 
+pub(super) unsafe fn toggle_bit(addr: u8, bit: u8) {
+    let value = read_volatile(addr as *const u8);
+    write_volatile(addr as *mut u8, value ^ (1 << bit));
+}
+
+pub(super) unsafe fn toggle_bit_interrupts_free(addr: u8, bit: u8) {
+    interrupts::free(|| toggle_bit(addr, bit));
+}
+
+pub(super) unsafe fn read_bit(addr: u8, bit: u8) -> bool {
+    let value = read_volatile(addr as *const u8);
+    value & (1 << bit) != 0
+}
+
 pub(super) trait RegisterControl {
     fn get_register_addr(&self) -> u8;
     fn get_mask(&self) -> u8;
@@ -52,5 +66,14 @@ pub(super) trait RegisterControl {
 
     unsafe fn clear_bit(&self) {
         self.modify_register(|value| value & !self.get_mask());
+    }
+
+    unsafe fn toggle_bit(&self) {
+        self.modify_register(|value| value ^ self.get_mask());
+    }
+
+    unsafe fn read_bit(&self) -> bool {
+        let value = read_volatile(self.get_register_addr() as *const u8);
+        value & self.get_mask() != 0
     }
 }

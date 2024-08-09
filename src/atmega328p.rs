@@ -40,5 +40,6 @@ mod usart;
 mod vectors;
 mod watchdog;
 
+pub use gpio::*;
 pub use interrupts::*;
 pub use power_management::*;

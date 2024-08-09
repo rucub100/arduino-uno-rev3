@@ -4,7 +4,7 @@
 use core::arch::asm;
 
 use super::{
-    common::{clear_bit, set_bit},
+    common::{clear_bit, read_bit, set_bit},
     registers::{
         BIT0, BIT1, BIT2, BIT3, BIT4, BIT5, BIT6, BIT7, DDRB_ADDR, DDRC_ADDR, DDRD_ADDR,
         MCUCR_ADDR_IO, PINB_ADDR, PINC_ADDR, PIND_ADDR, PORTB_ADDR, PORTC_ADDR, PORTD_ADDR, PUD,
@@ -53,6 +53,20 @@ pub trait Port {
 
         set_bit(port_addr, index);
         set_bit(ddr_addr, index);
+    }
+
+    unsafe fn toggle(&self) {
+        let index = self.index();
+        let port_addr = self.get_port_addr();
+
+        set_bit(port_addr, index);
+    }
+
+    unsafe fn read(&self) -> bool {
+        let index = self.index();
+        let pin_addr = self.get_pin_addr();
+
+        read_bit(pin_addr, index)
     }
 }
 
@@ -211,5 +225,15 @@ pub fn configure_output_low(port: impl Port) {
 pub fn configure_output_high(port: impl Port) {
     unsafe {
         port.set_output_high();
+    }
+}
+
+pub fn read_pin(port: impl Port) -> bool {
+    unsafe { port.read() }
+}
+
+pub fn toggle_pin(port: impl Port) {
+    unsafe {
+        port.toggle();
     }
 }
