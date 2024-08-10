@@ -55,11 +55,12 @@ pub trait Port {
         set_bit(ddr_addr, index);
     }
 
+    /// Toggle the pin independent of its direction
     unsafe fn toggle(&self) {
         let index = self.index();
-        let port_addr = self.get_port_addr();
+        let pin_addr = self.get_pin_addr();
 
-        set_bit(port_addr, index);
+        set_bit(pin_addr, index);
     }
 
     unsafe fn read(&self) -> bool {
