@@ -258,4 +258,6 @@ mod timer0 {
     }
 }
 
+// TODO - Implement Timer1 and Timer2
+
 pub use timer0::*;
