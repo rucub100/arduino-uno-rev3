@@ -43,3 +43,4 @@ mod watchdog;
 pub use gpio::*;
 pub use interrupts::*;
 pub use power_management::*;
+pub use timers_pwm::*;
