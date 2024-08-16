@@ -38,7 +38,6 @@ mod spi;
 mod system;
 mod timers_pwm;
 mod usart;
-mod vectors;
 mod watchdog;
 
 pub use gpio::*;

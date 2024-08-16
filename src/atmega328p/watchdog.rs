@@ -46,6 +46,7 @@ unsafe fn watchdog_change_enable() {
 }
 
 #[allow(dead_code)]
+#[inline(always)]
 pub fn configure_watchdog_timer(timeout: WatchdogTimeout) {
     unsafe {
         asm!(
@@ -54,12 +55,13 @@ pub fn configure_watchdog_timer(timeout: WatchdogTimeout) {
             "lds r16, {wdtcsr}", // load WDTCSR into r16
             "ori r16, {wdce}", // set WDCE and WDE
             "sts {wdtcsr}, r16", // timed sequence
-            "ldi r16, {timeout}", // load timeout into r16
+            "mov r16, {timeout}", // load timeout into r16
             "sts {wdtcsr}, r16", // set timeout
             "sei",  // enable global interrupts
             wdtcsr = const WDTCSR_ADDR,
             wdce = const (1 << WDCE) | (1 << WDE),
             timeout = in(reg) timeout as u8,
+            out("r16") _,
         );
     }
 }

@@ -1,44 +1,24 @@
 #![no_std]
 #![no_main]
+#![feature(abi_avr_interrupt)] // https://doc.rust-lang.org/nightly/unstable-book/language-features/abi-avr-interrupt.html
+#![feature(asm_experimental_arch)]
+#![feature(asm_const)]
 
-use atmega328p::{sleep_mode, SleepMode};
+use atmega328p::{
+    configure_output_low, configure_watchdog_mode, configure_watchdog_timer,
+    enable_global_interrupts, sleep_mode, PortB,
+};
 use panic_halt as _;
 
-/**
- * TODO:
- *
- * Create multiple examples in examples/ folder
- *
- * Interrupts:
- * - enable/disable individual interrupts
- * - allow to implement ISRs dynamically (only one registration - static check)
- *
- * Watchdog:
- * - provide simple API to enable/disable watchdog
- *
- * IO:
- * - api to configure general digital IO
- * - configure pull-up resistors
- *
- * Timer and PWM:
- * - api to configure timers
- * - compare mode
- * - capture mode
- * - api to configure PWM
- *
- * ADC
- * USART
- * SPI
- * TWI/I2C
- * EEPROM
- * Analog Comparator
- * Advanced Topics
- *
- */
+mod vectors;
 
 #[no_mangle]
 pub extern "C" fn main() {
+    configure_output_low(PortB::PB5);
+    configure_watchdog_timer(atmega328p::WatchdogTimeout::Ms250);
+    configure_watchdog_mode(atmega328p::WatchdogMode::Interrupt);
+    enable_global_interrupts();
     loop {
-        sleep_mode(SleepMode::Idle);
+        sleep_mode(atmega328p::SleepMode::Idle);
     }
 }
