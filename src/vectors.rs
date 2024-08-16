@@ -2,8 +2,6 @@
 //!
 //! For detailed information, refer to page 49 in the ATmega328P datasheet.
 
-use atmega328p::{toggle_output_pin, PortB};
-
 /// Reset + 25 Interrupt Vectors
 #[allow(dead_code)]
 const IVT_SIZE: usize = 25;
@@ -43,12 +41,12 @@ const IVT_SIZE: usize = 25;
 //     // Your ISR code here
 // }
 
-/// WDT - Watchdog Time-out Interrupt
-#[no_mangle]
-#[export_name = "__vector_6"]
-pub extern "avr-interrupt" fn wdt_isr() {
-    toggle_output_pin(PortB::PB5);
-}
+// /// WDT - Watchdog Time-out Interrupt
+// #[no_mangle]
+// #[export_name = "__vector_6"]
+// pub extern "avr-interrupt" fn wdt_isr() {
+//     // Your ISR code here
+// }
 
 // /// TIMER2 COMPA - Timer/Counter2 Compare Match A
 // #[no_mangle]
