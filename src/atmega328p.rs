@@ -46,3 +46,4 @@ pub use interrupts::*;
 pub use power_management::*;
 pub use system::*;
 pub use timers_pwm::*;
+pub use watchdog::*;

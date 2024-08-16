@@ -22,6 +22,12 @@ pub(super) unsafe fn set_bit(addr: u8, bit: u8) {
 }
 
 #[allow(dead_code)]
+pub(super) unsafe fn set_mask(addr: u8, mask: u8) {
+    let value = read_volatile(addr as *const u8);
+    write_volatile(addr as *mut u8, value | mask);
+}
+
+#[allow(dead_code)]
 pub(super) unsafe fn set_bit_interrupts_free(addr: u8, bit: u8) {
     interrupts::free(|| set_bit(addr, bit));
 }
@@ -30,6 +36,23 @@ pub(super) unsafe fn set_bit_interrupts_free(addr: u8, bit: u8) {
 pub(super) unsafe fn clear_bit(addr: u8, bit: u8) {
     let value = read_volatile(addr as *const u8);
     write_volatile(addr as *mut u8, value & !(1 << bit));
+}
+
+#[allow(dead_code)]
+pub(super) unsafe fn clear_mask(addr: u8, mask: u8) {
+    let value = read_volatile(addr as *const u8);
+    write_volatile(addr as *mut u8, value & !mask);
+}
+
+#[allow(dead_code)]
+pub(super) unsafe fn clear_and_set_mask(addr: u8, clear_mask: u8, set_mask: u8) {
+    let value = read_volatile(addr as *const u8);
+    write_volatile(addr as *mut u8, (value & !clear_mask) | set_mask);
+}
+
+#[allow(dead_code)]
+pub(super) unsafe fn clear_register(addr: u8) {
+    write_volatile(addr as *mut u8, 0);
 }
 
 #[allow(dead_code)]
